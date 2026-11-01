@@ -210,7 +210,7 @@ const drive = r => 'https://drive.google.com/drive/folders/' + r[2];
 const usable = r => r[21] !== 'Vazio' && r[26] !== false;
 
 $('hero-eyebrow').textContent = `Acervo do Drive · ${R.length} cursos catalogados`;
-$('footnote').textContent = 'Levantamento de 01/11/2026. Aulas contadas em até dois níveis de pasta.';
+$('footnote').textContent = `Todos os ${R.length} cursos entram na busca. O número de aulas é aproximado: contamos os vídeos até o segundo nível de pastas ("≥" indica que pode haver mais). Levantamento de 01/11/2026.`;
 
 /* ---------- busca local ---------- */
 const STOP = new Set('a o os as de da do das dos e em um uma uns umas para pra com como que quero queria gostaria aprender aprendendo sobre no na nos nas meu minha meus minhas mais me eu ao aos por ser ter fazer curso cursos algo coisa coisas saber ja nao sim tenho estou sou qual quais melhor bom boa preciso indica indique recomenda recomende'.split(' '));
