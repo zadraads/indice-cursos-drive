@@ -180,8 +180,6 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     <div id="start" style="display:flex;flex-direction:column;gap:28px">
       <div class="section-head" style="margin-top:0"><p class="eyebrow">Temas do acervo</p><p class="small">Escolha um tema para ver todos os cursos dele.</p></div>
       <div class="sugs" id="sugs" aria-label="Temas do acervo"></div>
-      <div class="section-head"><p class="eyebrow">Trilhas prontas</p><p class="small">Sequências do básico ao avançado, só com cursos sem alerta.</p></div>
-      <div class="tgrid" id="tgrid"></div>
     </div>
   </section>
 
@@ -443,9 +441,6 @@ $('stop').addEventListener('click', () => ctl && ctl.abort());
     $('sugs').append(b);
   });
 })();
-
-$('tgrid').innerHTML = (D.trilhas || []).map((t, k) =>
-  `<a class="tcard" href="#trilhas"><span class="eyebrow">${String(k + 1).padStart(2, '0')} — ${esc(t.tema)}</span><span class="title">${esc(t.titulo)}</span><span class="small">${t.itens.length} cursos · ${esc(R[t.itens[0].i][12])} a ${esc(R[t.itens[t.itens.length - 1].i][12])}</span></a>`).join('');
 
 /* ---------- trilhas ---------- */
 $('trails').innerHTML = (D.trilhas || []).map((t, k) =>
