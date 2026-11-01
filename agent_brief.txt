@@ -1,0 +1,15 @@
+Goal: find the real author/creator (person or company) of Brazilian online courses (infoprodutos) whose folder names don't include the author. These folders sit in a shared Google Drive of course packs.
+
+Tools: load with ToolSearch "select:mcp__Google_Drive__search_files" (also WebSearch and WebFetch are available directly).
+
+For EACH course in your list (lines are: idx<TAB>course name<TAB>drive folder id<TAB>pack):
+1. Peek inside the Drive folder: search_files with query "parentId = '<folder id>'", pageSize 50, excludeContentSnippets true. Look at file/subfolder names for the author's name, brand, @handle, or platform (e.g. "Aula 1 - Fulano", "Bônus @fulano", PDF titles). If useful subfolders exist, you may look one level deeper (max 2 extra calls per course).
+2. Web search (standard mode) the course name in Portuguese, e.g. "<course name> curso" and variants with "Hotmart", "Kiwify", "mentoria". Confirm the author from a sales page, Hotmart/Kiwify page, the creator's Instagram/YouTube, or a reputable article.
+3. Only record an author you actually found evidence for. Never guess from the name alone. If evidence is weak or conflicting, set confidence "baixa" and explain in the note. If nothing is found, leave author empty.
+
+Write results with Bash using a quoted heredoc (cat >> FILE <<'EOF2' ... EOF2), one line per course, tab-separated:
+idx<TAB>author<TAB>confidence (alta|média|baixa|—)<TAB>source (URL, or "pasta: <file name that showed it>")<TAB>short note in Portuguese (max ~15 words)
+
+Confidence: alta = sales page or creator's own channel confirms; média = folder contents or one secondary source; baixa = indirect/conflicting.
+For folders that are not a single course (e.g. "Pasta 1"), describe in the note what is inside (which courses/authors) instead of an author.
+Skip nothing; write a line for every idx. Reply at the end only with how many authors you found (alta/média/baixa) and how many stayed empty. Do not paste the table in the reply.

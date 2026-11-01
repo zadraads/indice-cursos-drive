@@ -1,0 +1,26 @@
+Goal: collect RAW structural data about Brazilian course folders in Google Drive. No interpretation, just facts.
+
+Tool: load with ToolSearch "select:mcp__Google_Drive__search_files".
+
+Input: JSONL, one course per line: {"i","curso","autor","fid","pacote"}; fid = course folder id.
+
+For each course collect TWO levels:
+- Level 1: direct children of fid.
+- Level 2: children of every level-1 FOLDER (mimeType application/vnd.google-apps.folder).
+Use BATCHED queries: (parentId = 'A' or parentId = 'B' or ...) with up to 10 ids per query, pageSize 200, excludeContentSnippets true, and follow nextPageToken until it is absent. Results carry parentId so you can attribute items. Do NOT go deeper than level 2.
+
+Per course, write ONE JSON line (append with Bash quoted heredoc: cat >> FILE <<'EOF2' ... EOF2; write after each batch of courses):
+{"i": <i>,
+ "n1": number of level-1 items,
+ "n2": number of level-2 items,
+ "folders1": number of level-1 folders,
+ "types": counts over levels 1+2 by kind: {"video": .., "pdf": .., "planilha": .., "doc": .., "texto": .., "imagem": .., "audio": .., "zip": .., "pasta": .., "outro": ..}
+     (video = mimeType video/* or .mp4/.mkv/.mov/.ts; planilha = spreadsheet/.xlsx/.csv; doc = google doc/.docx; texto = text/plain/.txt/.md; zip = .zip/.rar),
+ "names": up to 60 names: ALL level-1 names first, then level-2 FOLDER names, then other level-2 names until 60. Keep original names, trim each to 80 chars.
+ "created_min": earliest createdTime among levels 1+2 (ISO date only, YYYY-MM-DD),
+ "created_max": latest createdTime among levels 1+2,
+ "modified_max": latest modifiedTime among levels 1+2,
+ "years_in_names": sorted unique 4-digit years 2010-2026 that appear in any name}
+If the folder is empty or inaccessible, write n1=0 and empty fields.
+
+Write a line for EVERY course. Reply at the end only with: lines written and how many folders were empty. Do not paste data.

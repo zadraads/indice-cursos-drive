@@ -1,0 +1,23 @@
+Task: classify Brazilian online courses from data already collected. Work offline: use only Read and Bash. No web, no Drive. Write in Portuguese.
+Today is 2026-10-31.
+
+Input JSONL fields per course: i, curso, autor, pacote, tema, resumo, topicos, competencias, plus crawl data: n1, n2, folders1, types{video,pdf,planilha,doc,texto,imagem,audio,zip,pasta,outro}, names[], created_min, created_max, modified_max, years_in_names[].
+Note: created_* are dates the files were uploaded to this Drive. Content can be older than the upload but not newer. Years in names (e.g. "2023", "Turma 2025") are the strongest signal of the content's year.
+
+Output: append one JSON line per course to your output file with Bash quoted heredoc (cat >> FILE <<'EOF2' ... EOF2), batches of ~25:
+{"i": <i>,
+ "ano": estimated content year as integer, or null. Use max(years_in_names) when it plausibly refers to the course edition; otherwise the year of created_min.
+ "ano_base": "nome" | "upload" | "—",
+ "atualidade": one of "Atual" | "Recente" | "Datado" | "Atemporal",
+    Rules. Platform-dependent subjects (paid traffic, ad platforms, AI tools, TikTok/Instagram/YouTube algorithms, marketplaces like Shopee/Amazon, dropshipping, automation tools, contingency): ano >= 2025 → "Atual"; 2024 → "Recente"; <= 2023 → "Datado".
+    Evergreen subjects (copywriting principles, sales, persuasion, oratory, mindset/personal development, languages, finance basics, crafts like makeup, health/fitness): "Atemporal", unless the course is mainly about a specific tool/platform version, then use the platform rule.
+    Mixed: judge by the dominant content.
+ "ferramentas": list of tools/platforms the course actually covers (evidence from names/topicos/resumo), using these labels when they apply: "Meta Ads","Google Ads","YouTube Ads","TikTok Ads","Taboola/Native Ads","Pinterest","Kwai","Instagram","TikTok","YouTube","WhatsApp","E-mail marketing","Hotmart","Kiwify","Eduzz","Monetizze","Shopify","Shopee","Mercado Livre","Amazon","Nuvemshop","WordPress/Elementor","Canva","CapCut","Premiere","Photoshop","After Effects","ChatGPT","Claude","Midjourney","Lovable","n8n","Make","ManyChat","Tracking/GTM/Pixel","Excel/Planilhas","Notion","Casas de aposta","Corretoras/Trading". Other clearly named tools may be added with their own name. Empty list if none.
+ "alerta": list (often empty) of: "Ads black/contingência" (cloaking, contas laranja, bypass de bloqueio, farm de contas, black hat), "Nicho adulto", "Apostas/jogos", "Day trade/opções binárias", "Promessa de dinheiro fácil" (only when the course's core pitch is get-rich-quick, e.g. "renda de 10k em 7 dias"), "Sedução/manipulação" (pickup, controlling partners), "Saúde sem respaldo" (extreme diets, unproven health claims). Do not flag ordinary marketing.
+ "integridade": "Completo" | "Parcial" | "Só bônus/material" | "Vazio" | "Indeterminado"
+    (Parcial: modules visibly missing, e.g. numbering jumps, only 2-3 modules of a big program, or summary says partial. Só bônus/material: only bonus/apostilas/no lessons. Vazio: n1 = 0 or no real files.)
+ "aulas": approximate number of video lessons = types.video (note: counts only 2 levels, so it is a floor),
+ "volume": "Curto" (< 15 aulas) | "Médio" (15–60) | "Extenso" (> 60) | "—" (no videos found at 2 levels; use "—" and rely on folders1 note) . If types.video is 0 but there are many level-2 folders, set "—".
+ "materiais": list of support materials present: "PDF/apostila","Planilhas","Templates/modelos","Prompts","Swipe file/exemplos","Scripts/roteiros","Mapas mentais","Áudios","Ferramenta/software","Comunidade/lives gravadas" — based on types and names.
+}
+Write a line for every course. Reply at the end only with counts per atualidade and per integridade, and how many have any alerta.

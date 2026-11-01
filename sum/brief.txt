@@ -1,0 +1,28 @@
+Goal: write a short content profile for each Brazilian online course (infoproduto) in your chunk, so it can feed a course index/recommendation tool. Write everything in Brazilian Portuguese.
+
+Input: a JSONL file, one course per line: {"i","curso","autor","fid","pacote"}. "fid" is the Google Drive folder id of the course.
+
+Tools: load with ToolSearch "select:mcp__Google_Drive__search_files". WebSearch is also available.
+
+How to gather evidence (be efficient):
+1. List the course folders' direct children in BATCHES: one search_files call with query
+   (parentId = 'ID1' or parentId = 'ID2' or ... up to 8 ids)
+   pageSize 200, excludeContentSnippets true. Results carry parentId, so you can split them per course. Paginate if nextPageToken appears.
+2. Module/subfolder names are the main evidence. When a course's children are only generic ("Módulo 1", "Aula 01") or a single wrapper folder, list one level deeper for that course (batch these too).
+3. Only if the folder gives almost nothing, do at most ONE quick web search for the course + author.
+4. Never invent content. If evidence is thin, keep fields short and set "base" accordingly.
+
+Output: append one JSON object per course (one line each) to your output file using Bash with a quoted heredoc (cat >> FILE <<'EOF2' ... EOF2). Write after every batch so nothing is lost. Fields:
+{"i": <same i>,
+ "macro": one of exactly: "Tráfego pago", "Copywriting", "Lançamentos e funis", "Conteúdo e redes sociais", "Marca pessoal e posicionamento", "IA e automação", "E-commerce e marketplaces", "Afiliados e negócios digitais", "Vendas e comercial", "Design, vídeo e edição", "Sites e landing pages", "Finanças e investimentos", "Apostas e trading", "Idiomas", "Desenvolvimento pessoal", "Relacionamento e sedução", "Saúde e corpo", "Outros",
+ "macro2": optional second macro from the same list or "",
+ "topicos": 3 to 6 short topics actually covered (strings, max ~6 words each),
+ "competencias": 2 to 4 skills/competences the student leaves with, as verbs (e.g. "Estruturar campanhas de remarketing"),
+ "nivel": "Iniciante" | "Intermediário" | "Avançado" | "Todos os níveis" | "—",
+ "formato": "Curso" | "Mentoria" | "Comunidade" | "Formação" | "Pack de materiais" | "Close Friends/bastidores" | "Imersão/workshop" | "Outro",
+ "resumo": one sentence, max 25 words, saying what the course teaches and for whom,
+ "base": "pasta" (from module names) | "pasta+web" | "web" | "só o nome" (inferred from title only),
+ "n_itens": number of direct children found in the folder (0 if empty)}
+
+If a folder is empty or inaccessible, still write the line with base "só o nome" or note emptiness in resumo ("Pasta vazia no Drive.").
+Write a line for every course in your chunk, no skipping. Reply at the end only with: lines written, count per "base", and how many folders were empty. Do not paste the data in the reply.

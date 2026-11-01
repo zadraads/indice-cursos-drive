@@ -1,0 +1,17 @@
+Task: assign a DIFFICULTY level to each Brazilian online course, in Portuguese. No tools needed besides Read and Bash; do not search the web or Drive.
+
+The question to answer for each course: "How much does the student need to ALREADY know or have in place to get real value from this course?" Judge by the topics and competences, NOT by marketing claims like "do zero" (the previous level field, nivel_anterior, often just repeated that claim; ignore it unless it agrees with the evidence).
+
+Levels (use exactly these strings):
+- "Iniciante": no prerequisites. First steps, basic concepts, setting up accounts/tools, language basics, generic mindset, a hobby or craft taught from scratch.
+- "Médio": assumes some practice. The student already sells, runs ads, posts content, or has a product/client, and the course improves or scales one channel or skill (e.g. optimizing Meta Ads campaigns, structuring a launch, copy for an existing offer, Shopee store already running).
+- "Avançado": assumes a running operation or solid experience. Dense strategic frameworks (positioning, mechanisms, offer architecture, brand/moneybrand), scaling, tracking/attribution, contingency/black-hat ad operations, high-ticket and direct-response copy at a professional level, programs aimed at people who already have revenue, behind-the-scenes/Close Friends material from operators that only makes sense with context.
+
+Fixed rule from the user: ANY course whose author is Doug Demarco (or "Doug", or @dougdemarco) is "Avançado".
+
+Input: a JSONL file, one course per line with fields i, curso, autor, tema, resumo, topicos, competencias, formato, nivel_anterior.
+
+Output: write one JSON object per line to your output file with Bash and a quoted heredoc (cat >> FILE <<'EOF2' ... EOF2), in batches of ~25:
+{"i": <same i>, "nivel": "Iniciante"|"Médio"|"Avançado", "porque": "<max 12 words in Portuguese saying what the student needs beforehand, or 'sem pré-requisito'>"}
+
+Write a line for every course. Be decisive; when in doubt between two levels, choose by the hardest competence listed. At the end reply only with the count per level.
