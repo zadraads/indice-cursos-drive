@@ -33,6 +33,11 @@ def kind(it):
 
 out = []
 todo = [json.loads(l) for f in sorted(glob.glob(os.path.join(base, 'todo_*.jsonl'))) for l in open(f) if l.strip()]
+full = set()
+for f in glob.glob(os.path.join(base, 'progress_*.txt')):
+    if os.path.basename(f).startswith('progress_l1'):
+        continue
+    full |= {int(x) for x in open(f).read().split()}
 seen_i = set()
 for c in todo:
     if c['i'] in seen_i: continue
@@ -50,7 +55,8 @@ for c in todo:
     years = sorted({int(y) for x in allit for y in re.findall(r'(?<!\d)(20[1-2]\d)(?!\d)', x['t']) if 2010 <= int(y) <= 2026})
     out.append(dict(i=c['i'], n1=len(l1), n2=len(l2), folders1=len(f1), types=types if allit else {}, names=names,
                     created_min=min(crs) if crs else '', created_max=max(crs) if crs else '',
-                    modified_max=max(mos) if mos else '', years_in_names=years))
+                    modified_max=max(mos) if mos else '', years_in_names=years,
+                    prof=2 if c['i'] in full else 1))
 with open(os.path.join(base, 'out_new.jsonl'), 'w', encoding='utf-8') as f:
     for d in out: f.write(json.dumps(d, ensure_ascii=False) + '\n')
 print('courses', len(out), 'empty', sum(1 for d in out if d['n1'] == 0), 'raw items', len(items))
