@@ -23,3 +23,28 @@
 {"i":88,"ano":2024,"ano_base":"upload","atualidade":"Recente","ferramentas":["Meta Ads","Canva"],"alerta":[],"integridade":"Completo","materiais":[]}
 {"i":92,"ano":2022,"ano_base":"nome","atualidade":"Datado","ferramentas":["Meta Ads","Google Ads","TikTok Ads","Canva","WhatsApp"],"alerta":[],"integridade":"Completo","materiais":["PDF/apostila","Planilhas","Templates/modelos","Comunidade/lives gravadas"]}
 {"i":96,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Completo","materiais":[]}
+{"i":100,"ano":2024,"ano_base":"nome","atualidade":"Recente","ferramentas":["Tracking/GTM/Pixel","Google Data Studio","ActiveCampaign","E-mail marketing","WhatsApp","Excel/Planilhas"],"alerta":[],"integridade":"Indeterminado","materiais":["Planilhas","Templates/modelos","Comunidade/lives gravadas"]}
+{"i":104,"ano":2024,"ano_base":"upload","atualidade":"Recente","ferramentas":["n8n","WhatsApp"],"alerta":[],"integridade":"Completo","materiais":["PDF/apostila"]}
+{"i":108,"ano":2024,"ano_base":"nome","atualidade":"Recente","ferramentas":["Meta Ads","Google Ads","Tracking/GTM/Pixel","Google Analytics","Looker Studio"],"alerta":["Ads black/contingência"],"integridade":"Completo","materiais":["PDF/apostila","Comunidade/lives gravadas"]}
+{"i":112,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["WhatsApp","n8n","Chatwoot","Mautic","Botpress","Bubble","WordPress/Elementor"],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
+{"i":116,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Meta Ads","Scenum"],"alerta":["Ads black/contingência"],"integridade":"Completo","materiais":["Planilhas","Ferramenta/software"]}
+{"i":120,"ano":2022,"ano_base":"nome","atualidade":"Datado","ferramentas":["Google Ads","Meta Ads","YouTube Ads","Instagram"],"alerta":[],"integridade":"Indeterminado","materiais":["PDF/apostila","Comunidade/lives gravadas"]}
+{"i":124,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Completo","materiais":["PDF/apostila","Templates/modelos"]}
+{"i":128,"ano":2023,"ano_base":"nome","atualidade":"Atemporal","ferramentas":["ChatGPT"],"alerta":[],"integridade":"Indeterminado","materiais":["PDF/apostila","Swipe file/exemplos","Comunidade/lives gravadas"]}
+{"i":132,"ano":2024,"ano_base":"upload","atualidade":"Atemporal","ferramentas":["Trello"],"alerta":[],"integridade":"Completo","materiais":["PDF/apostila"]}
+{"i":136,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Indeterminado","materiais":["PDF/apostila","Planilhas"]}
+{"i":140,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Meta Ads","Google Ads","YouTube Ads","Google Analytics","Google Merchant Center"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":144,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":["Casas de aposta"],"alerta":["Apostas/jogos"],"integridade":"Completo","materiais":[]}
+{"i":148,"ano":2024,"ano_base":"upload","atualidade":"Recente","ferramentas":["WhatsApp","Instagram","TikTok","Pinterest","Shopee"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":152,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["YouTube"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":156,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
+{"i":160,"ano":2026,"ano_base":"upload","atualidade":"Atual","ferramentas":["Tracking/GTM/Pixel","Meta Ads","TikTok Ads","Google Ads","Google Analytics","Stape"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":164,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Amazon"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":168,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Taboola/Native Ads","Tracking/GTM/Pixel"],"alerta":[],"integridade":"Indeterminado","materiais":["PDF/apostila","Templates/modelos"]}
+{"i":172,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Meta Ads"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":176,"ano":2022,"ano_base":"nome","atualidade":"Datado","ferramentas":["Shopify","Meta Ads"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":180,"ano":2026,"ano_base":"upload","atualidade":"Atual","ferramentas":["MoviApi"],"alerta":[],"integridade":"Parcial","materiais":["Templates/modelos"]}
+{"i":184,"ano":2024,"ano_base":"upload","atualidade":"Recente","ferramentas":["YouTube Ads"],"alerta":[],"integridade":"Completo","materiais":["Comunidade/lives gravadas"]}
+{"i":188,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Parcial","materiais":[]}
+{"i":192,"ano":2022,"ano_base":"nome","atualidade":"Datado","ferramentas":["Meta Ads","Instagram"],"alerta":[],"integridade":"Indeterminado","materiais":["Templates/modelos"]}
+{"i":196,"ano":2026,"ano_base":"upload","atualidade":"Atemporal","ferramentas":["Instagram"],"alerta":[],"integridade":"Indeterminado","materiais":["PDF/apostila"]}
