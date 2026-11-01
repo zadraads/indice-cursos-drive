@@ -33,7 +33,10 @@ def kind(it):
 
 out = []
 todo = [json.loads(l) for f in sorted(glob.glob(os.path.join(base, 'todo_*.jsonl'))) for l in open(f) if l.strip()]
+seen_i = set()
 for c in todo:
+    if c['i'] in seen_i: continue
+    seen_i.add(c['i'])
     l1 = sorted(kids.get(c['fid'], []), key=lambda x: x['t'])
     f1 = [x for x in l1 if x['mime'] == FOLDER]
     l2 = [y for x in f1 for y in sorted(kids.get(x['id'], []), key=lambda z: z['t'])]
