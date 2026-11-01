@@ -165,7 +165,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       </form>
     </div>
     <div id="start" style="display:flex;flex-direction:column;gap:28px">
-      <div class="section-head" style="margin-top:0"><p class="eyebrow">Temas do acervo</p><p class="small">Escolha um tema para receber uma sequência de cursos.</p></div>
+      <div class="section-head" style="margin-top:0"><p class="eyebrow">Temas do acervo</p><p class="small">Escolha um tema para ver todos os cursos dele.</p></div>
       <div class="sugs" id="sugs" aria-label="Temas do acervo"></div>
       <div class="section-head"><p class="eyebrow">Trilhas prontas</p><p class="small">Sequências do básico ao avançado, só com cursos sem alerta.</p></div>
       <div class="tgrid" id="tgrid"></div>
@@ -422,11 +422,11 @@ $('stop').addEventListener('click', () => ctl && ctl.abort());
 
 (() => {
   const n = {};
-  R.forEach(r => { if (r[8] && usable(r)) n[r[8]] = (n[r[8]] || 0) + 1; });
+  R.forEach(r => new Set([r[8], r[9]].filter(Boolean)).forEach(t => { n[t] = (n[t] || 0) + 1; }));
   Object.entries(n).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pt')).forEach(([t, c]) => {
     const b = document.createElement('button'); b.type = 'button'; b.className = 'sug';
     b.innerHTML = `${esc(t)} <span class="sug__n">${c}</span>`;
-    b.onclick = () => ask(`Quero aprender sobre ${t}, do básico ao avançado`, t);
+    b.onclick = () => showTheme(t);
     $('sugs').append(b);
   });
 })();
@@ -461,6 +461,12 @@ function renderIndex() {
 ['iq', 'it', 'in', 'ia', 'if', 'ial'].forEach(id => $(id).addEventListener(id === 'iq' ? 'input' : 'change', () => { shown = 60; renderIndex(); }));
 $('imore').addEventListener('click', () => { shown += 120; renderIndex(); });
 renderIndex();
+
+function showTheme(t) {
+  $('iq').value = ''; $('in').value = ''; $('ia').value = ''; $('if').value = '';
+  $('it').value = t; $('ial').checked = true; shown = 60; renderIndex();
+  location.hash = '#indice';
+}
 
 /* ---------- navegação ---------- */
 function route() {
