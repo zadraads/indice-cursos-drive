@@ -94,6 +94,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sugs{display:flex;flex-wrap:wrap;gap:8px}
 .sug{background:transparent;border:1px solid var(--ink);padding:7px 12px;font-size:13px;cursor:pointer;text-align:left}
 .sug:hover{background:var(--paper-alt)}
+.sug__n{font-family:var(--mono);font-size:11px;color:var(--ink-muted);margin-left:6px;font-variant-numeric:tabular-nums}
 
 .section-head{display:flex;flex-direction:column;gap:8px;margin-top:20px}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
@@ -164,7 +165,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       </form>
     </div>
     <div id="start" style="display:flex;flex-direction:column;gap:28px">
-      <div class="sugs" id="sugs" aria-label="Sugestões"></div>
+      <div class="section-head" style="margin-top:0"><p class="eyebrow">Temas do acervo</p><p class="small">Escolha um tema para receber uma sequência de cursos.</p></div>
+      <div class="sugs" id="sugs" aria-label="Temas do acervo"></div>
       <div class="section-head"><p class="eyebrow">Trilhas prontas</p><p class="small">Sequências do básico ao avançado, só com cursos sem alerta.</p></div>
       <div class="tgrid" id="tgrid"></div>
     </div>
@@ -328,8 +330,13 @@ function fillBot(el, text, picks, note) {
     + (picks.length ? `<ol class="recs">${picks.map((p, k) => courseBlock(R[p.i], p.porque, k + 1)).join('')}</ol>` : '')
     + (note ? `<p class="msg-bot__note">${esc(note)}</p>` : '');
 }
-function localPicks(cands) {
-  const top = cands.slice(0, 5).map(c => c.i);
+function localPicks(cands, spread) {
+  let top = cands.slice(0, 5).map(c => c.i);
+  if (spread) {  // tema inteiro: cobre os três níveis
+    const by = l => cands.filter(c => R[c.i][12] === l).map(c => c.i);
+    top = [...by('Iniciante').slice(0, 2), ...by('Médio').slice(0, 2), ...by('Avançado').slice(0, 1)];
+    if (top.length < 5) top = [...new Set([...top, ...cands.map(c => c.i)])].slice(0, 5);
+  }
   top.sort((a, b) => LV.indexOf(R[a][12]) - LV.indexOf(R[b][12]));
   return top.map(i => {
     const c = cands.find(x => x.i === i), r = R[i];
@@ -342,15 +349,27 @@ function setBusy(b) {
   busy = b; $('send').hidden = b; $('stop').hidden = !b; $('q').disabled = b;
 }
 
-async function ask(q) {
+async function ask(q, theme) {
   q = q.trim(); if (!q || busy) return;
   $('hero').hidden = true; $('start').hidden = true;
   addUser(q); const bot = addBot(); setBusy(true);
   const withAlert = $('al').checked;
   // continuação: junta o pedido anterior à busca quando o novo é curto
   const prev = history.length ? history[history.length - 1].q : '';
-  let cands = rank(q, withAlert);
-  if (cands.length < 8 && prev) cands = rank(prev + ' ' + q, withAlert);
+  let cands;
+  if (theme) {
+    const AT = {Atual: 3, Recente: 2, Atemporal: 2, Datado: 0};
+    cands = R.map((r, i) => ({i, r})).filter(({r}) => (r[8] === theme || r[9] === theme) && usable(r) && (withAlert || !(r[20] || []).length))
+      .map(({i, r}) => ({i, s: (r[8] === theme ? 2 : 1) + (AT[r[18]] || 0) + (r[21] === 'Completo' ? .5 : 0), hit: []}))
+      .sort((a, b) => b.s - a.s);
+  } else {
+    cands = rank(q, withAlert);
+    if (cands.length < 8 && prev) cands = rank(prev + ' ' + q, withAlert);
+  }
+  if (!cands.length && theme && !withAlert) {
+    fillBot(bot, 'Os cursos deste tema estão marcados com alerta e ficam escondidos. Marque "Incluir cursos com alerta" e escolha o tema de novo para vê-los.', []);
+    setBusy(false); return;
+  }
   if (!cands.length) {
     fillBot(bot, 'Não achei cursos no acervo para esse pedido. Tente descrever com outras palavras: a plataforma, a habilidade ou o resultado que você quer.', []);
     setBusy(false); return;
@@ -379,13 +398,13 @@ async function ask(q) {
           sample = null; mode.textContent = 'Busca no índice';
           note = 'O uso do Claude não foi autorizado nesta página. Daqui em diante, as recomendações vêm da busca no índice.';
         } else if (code === 'rate_limited') note = 'Limite de uso do Claude atingido por agora. Abaixo, a recomendação pela busca no índice.';
-        const picks = localPicks(shortlist);
+        const picks = localPicks(shortlist, !!theme);
         fillBot(bot, 'Cursos do acervo que mais combinam com o seu pedido, do mais básico ao mais avançado.', picks, note);
         history.push({q, a: JSON.stringify({cursos: picks.map(p => ({i: p.i}))})});
       }
     }
   } else {
-    const picks = localPicks(shortlist);
+    const picks = localPicks(shortlist, !!theme);
     fillBot(bot, 'Cursos do acervo que mais combinam com o seu pedido, do mais básico ao mais avançado.', picks,
       'Recomendação feita pela busca no índice. Aberta no Claude, esta página pede ao Claude para escolher e explicar a ordem.');
     history.push({q, a: JSON.stringify({cursos: picks.map(p => ({i: p.i}))})});
@@ -401,12 +420,16 @@ qEl.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !
 $('f').addEventListener('submit', e => { e.preventDefault(); ask(qEl.value); });
 $('stop').addEventListener('click', () => ctl && ctl.abort());
 
-['Quero começar a anunciar no Meta Ads, nunca rodei campanha',
- 'Já vendo na Shopee e quero escalar',
- 'Como usar IA para criar conteúdo sem aparecer',
- 'Quero aprender copy para VSL',
- 'Automatizar atendimento no WhatsApp']
- .forEach(s => { const b = document.createElement('button'); b.type = 'button'; b.className = 'sug'; b.textContent = s; b.onclick = () => ask(s); $('sugs').append(b); });
+(() => {
+  const n = {};
+  R.forEach(r => { if (r[8] && usable(r)) n[r[8]] = (n[r[8]] || 0) + 1; });
+  Object.entries(n).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pt')).forEach(([t, c]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'sug';
+    b.innerHTML = `${esc(t)} <span class="sug__n">${c}</span>`;
+    b.onclick = () => ask(`Quero aprender sobre ${t}, do básico ao avançado`, t);
+    $('sugs').append(b);
+  });
+})();
 
 $('tgrid').innerHTML = (D.trilhas || []).map((t, k) =>
   `<a class="tcard" href="#trilhas"><span class="eyebrow">${String(k + 1).padStart(2, '0')} — ${esc(t.tema)}</span><span class="title">${esc(t.titulo)}</span><span class="small">${t.itens.length} cursos · ${esc(R[t.itens[0].i][12])} a ${esc(R[t.itens[t.itens.length - 1].i][12])}</span></a>`).join('');
