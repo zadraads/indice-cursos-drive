@@ -23,3 +23,28 @@
 {"i":90,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Só bônus/material","materiais":["PDF/apostila","Templates/modelos"]}
 {"i":94,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Hotmart","Eduzz","ManyChat","WhatsApp","E-mail marketing","ActiveCampaign","Telegram","Guru"],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
 {"i":98,"ano":2026,"ano_base":"nome","atualidade":"Atual","ferramentas":["Claude","n8n","Obsidian","ChatGPT"],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas","Prompts"]}
+{"i":102,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Pinterest"],"alerta":[],"integridade":"Completo","materiais":["PDF/apostila","Comunidade/lives gravadas"]}
+{"i":106,"ano":2023,"ano_base":"nome","atualidade":"Datado","ferramentas":[],"alerta":["Ads black/contingência"],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
+{"i":110,"ano":2024,"ano_base":"upload","atualidade":"Atemporal","ferramentas":["Instagram"],"alerta":[],"integridade":"Indeterminado","materiais":["PDF/apostila","Comunidade/lives gravadas"]}
+{"i":114,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Meta Ads","Google Ads"],"alerta":["Ads black/contingência"],"integridade":"Completo","materiais":["PDF/apostila"]}
+{"i":118,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Meta Ads"],"alerta":["Ads black/contingência"],"integridade":"Completo","materiais":[]}
+{"i":122,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Completo","materiais":["Swipe file/exemplos","Comunidade/lives gravadas"]}
+{"i":126,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Parcial","materiais":["PDF/apostila"]}
+{"i":130,"ano":2023,"ano_base":"nome","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
+{"i":134,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["WordPress/Elementor"],"alerta":[],"integridade":"Completo","materiais":[]}
+{"i":138,"ano":2024,"ano_base":"upload","atualidade":"Atemporal","ferramentas":["Telegram"],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
+{"i":142,"ano":2024,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":146,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Completo","materiais":["PDF/apostila"]}
+{"i":150,"ano":2026,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":154,"ano":2026,"ano_base":"upload","atualidade":"Atual","ferramentas":["Claude","TikTok","Instagram","Canva","App Store/Google Play"],"alerta":[],"integridade":"Parcial","materiais":[]}
+{"i":158,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Instagram","WhatsApp","YouTube","Meta Ads","E-mail marketing"],"alerta":[],"integridade":"Completo","materiais":[]}
+{"i":162,"ano":2024,"ano_base":"upload","atualidade":"Recente","ferramentas":["YouTube Ads"],"alerta":["Ads black/contingência"],"integridade":"Completo","materiais":["Comunidade/lives gravadas"]}
+{"i":166,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":["Instagram"],"alerta":[],"integridade":"Completo","materiais":["PDF/apostila","Comunidade/lives gravadas"]}
+{"i":170,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":["Premiere"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":174,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Meta Ads"],"alerta":[],"integridade":"Completo","materiais":["Planilhas"]}
+{"i":178,"ano":2023,"ano_base":"nome","atualidade":"Datado","ferramentas":["Meta Ads","DSers","Tracking/GTM/Pixel"],"alerta":[],"integridade":"Indeterminado","materiais":[]}
+{"i":182,"ano":2023,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":["Nicho adulto"],"integridade":"Completo","materiais":[]}
+{"i":186,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":["Mercado Livre","Meta Ads","Instagram"],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
+{"i":190,"ano":2026,"ano_base":"upload","atualidade":"Atemporal","ferramentas":[],"alerta":[],"integridade":"Vazio","materiais":[]}
+{"i":194,"ano":2023,"ano_base":"upload","atualidade":"Datado","ferramentas":[],"alerta":[],"integridade":"Indeterminado","materiais":["Comunidade/lives gravadas"]}
+{"i":198,"ano":2026,"ano_base":"upload","atualidade":"Atual","ferramentas":[],"alerta":[],"integridade":"Indeterminado","materiais":["Prompts"]}
