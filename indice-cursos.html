@@ -121,10 +121,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .filters input,.filters select{font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:0;padding:9px 12px;min-width:0}
 .filters input{flex:1 1 260px}
 .filters select{flex:1 1 160px}
+#io{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
 .count{font-family:var(--mono);font-size:12px;color:var(--ink-muted);font-variant-numeric:tabular-nums}
-.ilist{list-style:none;margin:0;padding:0}
-.irow{display:flex;flex-direction:column;gap:5px;padding:14px 0;border-top:1px solid var(--line)}
-.irow:first-child{border-top:2px solid var(--ink)}
+.ilist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.icard{border:1px solid var(--ink);padding:18px;display:flex;flex-direction:column;min-width:0;background:var(--paper)}
+.icard .rec__body{flex:1;gap:8px}
+.icard .rec__why{font-size:14px;line-height:1.5}
+.icard .rec__foot{margin-top:auto;padding-top:6px}
+.icard .rec__name small{display:block;margin-top:2px}
+.icard .dot{display:none}
+.icard .rec__foot{flex-direction:column;align-items:flex-start}
+.icard .rec__foot .go{order:2;margin-top:6px}
 .more{align-self:flex-start;background:transparent;border:1px solid var(--ink);padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer}
 
 .foot{max-width:880px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line)}
@@ -196,6 +203,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
       <select id="in" aria-label="Nível"><option value="">Todos os níveis</option><option>Iniciante</option><option>Médio</option><option>Avançado</option></select>
       <select id="ia" aria-label="Atualidade"><option value="">Toda atualidade</option><option>Atual</option><option>Recente</option><option>Atemporal</option><option>Datado</option></select>
       <select id="if" aria-label="Ferramenta"><option value="">Todas as ferramentas</option></select>
+      <select id="io" aria-label="Ordenar por"><option value="estudo">Ordem de estudo</option><option value="atual">Mais atuais primeiro</option><option value="aulas">Mais aulas primeiro</option><option value="az">Nome (A–Z)</option></select>
     </div>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
       <label class="toggle" for="ial"><input type="checkbox" id="ial"> Mostrar cursos com alerta</label>
@@ -296,7 +304,7 @@ function courseBlock(r, why, n, tag = 'li', cls = 'rec') {
   const dup = r[25] ? `<span class="chip">${r[26] ? 'Cópia principal' : 'Outra cópia'}</span>` : '';
   return `<${tag} class="${cls}">${n != null ? `<span class="rec__n">${n}</span>` : ''}<div class="rec__body">
     <div class="meta">${metaLine(r)}</div>
-    <p class="rec__name">${esc(r[0])}${r[1] ? ` <small>· ${esc(r[1])}</small>` : ''}</p>
+    <p class="rec__name">${esc(r[0])}${r[1] ? ` <small><span class="dot">· </span>${esc(r[1])}</small>` : ''}</p>
     ${why ? `<p class="rec__why">${esc(why)}</p>` : ''}
     <div class="rec__foot"><a class="go" href="${drive(r)}" target="_blank" rel="noopener">Abrir pasta no Drive ↗</a>${r[8] ? `<span class="chip">${esc(r[8])}</span>` : ''}${dup}${al}</div>
   </div></${tag}>`;
@@ -462,17 +470,24 @@ function renderIndex() {
     if (!all && (r[20] || []).length) { hid++; return; }
     rows.push(i);
   });
-  $('ilist').innerHTML = rows.slice(0, shown).map(i => courseBlock(R[i], R[i][7], null, 'li', 'irow')).join('');
+  const o = $('io').value, AT = {Atual: 0, Recente: 1, Atemporal: 2, Datado: 3};
+  const lvk = i => { const k = LV.indexOf(R[i][12]); return k < 0 ? 3 : k; };
+  const alk = i => (R[i][20] || []).length ? 1 : 0, atk = i => AT[R[i][18]] ?? 4, au = i => R[i][22] || 0, nm = (a, b) => R[a][0].localeCompare(R[b][0], 'pt');
+  rows.sort(o === 'az' ? nm
+    : o === 'aulas' ? (a, b) => au(b) - au(a) || nm(a, b)
+    : o === 'atual' ? (a, b) => atk(a) - atk(b) || (R[b][16] || 0) - (R[a][16] || 0) || lvk(a) - lvk(b) || nm(a, b)
+    : (a, b) => lvk(a) - lvk(b) || alk(a) - alk(b) || atk(a) - atk(b) || au(b) - au(a) || nm(a, b));
+  $('ilist').innerHTML = rows.slice(0, shown).map(i => courseBlock(R[i], R[i][7], null, 'li', 'icard')).join('');
   $('icount').textContent = `${rows.length} de ${R.length} cursos` + (hid ? ` · ${hid} com alerta escondidos` : '');
   $('imore').hidden = rows.length <= shown;
 }
-['iq', 'it', 'in', 'ia', 'if', 'ial'].forEach(id => $(id).addEventListener(id === 'iq' ? 'input' : 'change', () => { shown = 60; renderIndex(); }));
+['iq', 'it', 'in', 'ia', 'if', 'io', 'ial'].forEach(id => $(id).addEventListener(id === 'iq' ? 'input' : 'change', () => { shown = 60; renderIndex(); }));
 $('imore').addEventListener('click', () => { shown += 120; renderIndex(); });
 renderIndex();
 
 function showTheme(t) {
   $('iq').value = ''; $('in').value = ''; $('ia').value = ''; $('if').value = '';
-  $('it').value = t; $('ial').checked = true; shown = 60; renderIndex();
+  $('it').value = t; $('io').value = 'estudo'; $('ial').checked = true; shown = 60; renderIndex();
   location.hash = '#indice';
 }
 
