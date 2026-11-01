@@ -31,7 +31,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .meta{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
 .meta span{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;background:var(--chip);color:var(--muted)}
 .meta .at-Atual{color:var(--accent);background:var(--accent-soft)}
-.meta .at-Datado{text-decoration:line-through;text-decoration-thickness:1px}
+.meta .at-Datado{border:1px solid var(--line);background:transparent}
 .meta .al{background:var(--warn-soft);color:var(--warn)}
 .meta .pr{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .meta .cp{border:1px dashed var(--line)}
@@ -81,6 +81,8 @@ a.go:hover{text-decoration:underline}
   td{border:0;padding:2px 0}
   td.c{font-size:16px}
   td.p{margin-top:6px}
+  .bar select{flex:1 1 calc(50% - 5px)}
+  .bar button{flex:1 1 auto}
 }
 </style>
 <div class="wrap">

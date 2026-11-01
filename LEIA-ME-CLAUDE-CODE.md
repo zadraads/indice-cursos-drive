@@ -1,5 +1,14 @@
 # Índice de Cursos do Drive: continuação no Claude Code
 
+> **Atualização 01/11/2026: etapas A a E concluídas** (sessão na nuvem do Claude Code, com o conector do Google Drive).
+> - Saídas: `data5.json`, `indice-cursos.html` (modelo `page_head5.html`), `Indice-Cursos-Drive.xlsx` (abas Cursos, Trilhas e Duplicatas).
+> - Para regerar tudo: `python3 crawl/aggregate.py && python3 build_final.py`.
+> - Varredura (A): dados brutos em `crawl/raw_*.tsv`, agregados em `crawl/out_new.jsonl`. Por decisão do usuário (custo), 172 dos 385 cursos restantes foram varridos em 2 níveis e os demais só no nível 1; o campo 28 (`prof`) marca isso, e nesses cursos a contagem de aulas é um piso ("≥ N aulas") e o volume fica "—". As consultas em lote do conector às vezes perdem itens em pastas com mais de ~60 arquivos, então as contagens são aproximadas.
+> - Classificação (B): `cls/out_*.jsonl`. Aulas e volume são calculados pelo script a partir da varredura.
+> - Duplicatas (C): 21 grupos (edições de anos diferentes do mesmo curso ficam no mesmo grupo).
+> - Trilhas (D): `trilhas.json`, 6 trilhas de 5 a 8 cursos. A de E-commerce termina em Médio porque não há curso avançado atual e sem alerta.
+> - Campos novos em `data5.json` (`rows[k]`): 16 ano, 17 base do ano, 18 atualidade, 19 ferramentas, 20 alerta, 21 integridade, 22 aulas, 23 volume, 24 materiais, 25 grupo de duplicata, 26 cópia principal, 27 nº de cópias, 28 profundidade da varredura.
+
 Este pacote tem tudo o que foi feito até 31/10/2026 no claude.ai, para continuar no Claude Code.
 
 ## O que já está pronto

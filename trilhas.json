@@ -1,0 +1,46 @@
+[
+ {"tema": "Tráfego pago", "titulo": "Tráfego pago: do primeiro anúncio à mensuração", "descricao": "Meta Ads com foco em material atual (2024–2026).", "itens": [
+  {"i": 257, "porque": "Começa pelo método criativo-campanha-análise, sem exigir experiência prévia com anúncios."},
+  {"i": 294, "porque": "Com a conta rodando, o gargalo passa a ser o criativo; aqui se aprende a fazer anúncios que prendem atenção."},
+  {"i": 101, "porque": "Junta tráfego, páginas e IA numa rotina de operação para quem já está anunciando."},
+  {"i": 476, "porque": "Aprofunda estrutura, leilão e escala no Meta Ads, pressupondo campanhas já no ar."},
+  {"i": 248, "porque": "Com volume de verba, rastrear certo vira prioridade: GTM, GA4 e API de Conversões."},
+  {"i": 284, "porque": "Fecha com atribuição no Meta, o nível mais técnico, que só faz sentido com o rastreamento montado."}]},
+ {"tema": "Afiliados e negócios digitais", "titulo": "Negócios digitais: da primeira venda à operação em dólar", "descricao": "Afiliação e produtos digitais, com material de 2024–2026.", "itens": [
+  {"i": 88, "porque": "Panorama do mercado digital para quem está começando: público, oferta e tráfego em etapas."},
+  {"i": 239, "porque": "Coloca a mão na massa como afiliado ou produtor, com site, copy e funis atualizados com IA."},
+  {"i": 228, "porque": "Leva a mesma lógica para vendas em dólar, ainda partindo da primeira venda."},
+  {"i": 109, "porque": "Para quem já vende: comunidade focada em afiliação internacional e otimização da operação."},
+  {"i": 453, "porque": "Escala com produtos prontos para a América Latina e criativos, pressupondo prática com tráfego."},
+  {"i": 179, "porque": "Termina no modelo DTC, com infraestrutura e tráfego pago de quem já opera em escala."}]},
+ {"tema": "Conteúdo e redes sociais", "titulo": "Conteúdo: de criador iniciante a conteúdo que vende", "descricao": "Crescimento orgânico e conversão de seguidores.", "itens": [
+  {"i": 132, "porque": "Base de marca pessoal, formatos e storytelling, sem pré-requisito."},
+  {"i": 278, "porque": "Aplica a base ao crescimento orgânico: nicho, narrativa, algoritmo e monetização."},
+  {"i": 226, "porque": "Ganha escala com IA para produzir conteúdo diário depois de definir nicho e linha editorial."},
+  {"i": 447, "porque": "Com audiência formada, ensina a transformar seguidores em compradores."},
+  {"i": 110, "porque": "Refina storytelling, imagem e posicionamento para quem já cria com constância."},
+  {"i": 465, "porque": "Fecha com o conteúdo como peça de venda (mercado, mecanismo, mistério), nível mais estratégico."}]},
+ {"tema": "IA e automação", "titulo": "IA e automação: do ChatGPT aos agentes", "descricao": "Ferramentas de IA, criação de apps e automações.", "itens": [
+  {"i": 325, "porque": "Introdução geral às ferramentas de IA, sem pré-requisito."},
+  {"i": 321, "porque": "Aprofunda num assistente específico, o Claude, do chat às skills e conectores."},
+  {"i": 324, "porque": "Primeiro projeto prático: criar apps e sites com Lovable, sem programar."},
+  {"i": 68, "porque": "Passa ao Claude Code no terminal, que pede alguma familiaridade com as ferramentas anteriores."},
+  {"i": 285, "porque": "Automações com n8n, VPS e WhatsApp, já um passo técnico acima."},
+  {"i": 67, "porque": "Arquitetura de projetos reais e agentes com Claude Code, para quem já constrói."},
+  {"i": 421, "porque": "Fecha com agentes autônomos e segundo cérebro, o conteúdo mais avançado da trilha."}]},
+ {"tema": "E-commerce e marketplaces", "titulo": "E-commerce: de marketplace a marca própria", "descricao": "Shopee, TikTok Shop e loja própria; não há curso avançado atual e sem alerta para fechar a trilha.", "itens": [
+  {"i": 354, "porque": "Porta de entrada mais simples: vender na Shopee do zero, com ou sem estoque."},
+  {"i": 66, "porque": "Expande para o TikTok Shop, com mineração de produtos e políticas da plataforma."},
+  {"i": 332, "porque": "Acelera as vendas no TikTok Shop com vídeos UGC feitos por IA, depois de entender a plataforma."},
+  {"i": 51, "porque": "Sai do marketplace para construir e escalar uma marca própria, pressupondo vendas já em andamento."},
+  {"i": 308, "porque": "Dropshipping internacional com Facebook Ads e escala, para quem já tem loja e tráfego."}]},
+ {"tema": "Copywriting", "titulo": "Copywriting: dos fundamentos ao mecanismo único", "descricao": "Copy de resposta direta, VSL e mecanismo.", "itens": [
+  {"i": 129, "porque": "Introdução prática com desafio de 7 dias, para quem nunca escreveu copy."},
+  {"i": 467, "porque": "Consolida fundamentos e carta de vendas antes das técnicas avançadas."},
+  {"i": 5, "porque": "Big Idea, vieses e copy para página e anúncio, para quem já tem uma oferta onde aplicar."},
+  {"i": 124, "porque": "Organiza o processo de criação de copy em etapas, útil depois dos fundamentos."},
+  {"i": 7, "porque": "Primeiro contato com VSL por um framework rápido de 22 passos."},
+  {"i": 122, "porque": "Estrutura VSLs completas em 8 blocos, com oferta e métricas, em nível profissional."},
+  {"i": 489, "porque": "Ensina a criar e nomear o mecanismo único, conceito central da resposta direta avançada."},
+  {"i": 299, "porque": "Fecha com a aplicação do mecanismo às ofertas; material do Doug Demarco, sempre Avançado."}]}
+]
