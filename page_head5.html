@@ -1,0 +1,145 @@
+<title>Índice de Cursos do Drive</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: one reading column, sticky toolbar, ledger-style table that becomes cards on phones */
+:root{
+  --bg:#f6f7f4; --surface:#ffffff; --fg:#1d2420; --muted:#66706a; --line:#dfe3de;
+  --accent:#1f6f5c; --accent-soft:#e2efe9; --chip:#eef1ec; --warn:#9a4a12; --warn-soft:#fbeadc;
+  --display:"Fraunces",Georgia,serif; --body:"Instrument Sans",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121614; --surface:#1a201d; --fg:#e7ece8; --muted:#9aa59f; --line:#2b332f;
+  --accent:#6cc4a8; --accent-soft:#1f3a31; --chip:#232b27; --warn:#f0a36b; --warn-soft:#3a2618; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121614; --surface:#1a201d; --fg:#e7ece8; --muted:#9aa59f; --line:#2b332f;
+  --accent:#6cc4a8; --accent-soft:#1f3a31; --chip:#232b27; --warn:#f0a36b; --warn-soft:#3a2618; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 48px}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(28px,4vw,40px);margin:0 0 6px;text-wrap:balance;letter-spacing:-.01em}
+.lede{color:var(--muted);margin:0 0 20px;max-width:65ch}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;border-bottom:1px solid var(--line)}
+.bar input,.bar select{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px}
+.bar input{flex:1 1 260px;min-width:0}
+.bar select{flex:0 1 170px;min-width:0}
+.bar button,.tabs button{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:9px 12px;cursor:pointer}
+.bar button[aria-pressed="true"]{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}
+.bar button:focus-visible,.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tabs{display:flex;gap:8px;margin:0 0 12px}
+.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.meta{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.meta span{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.meta .at-Atual{color:var(--accent);background:var(--accent-soft)}
+.meta .at-Datado{text-decoration:line-through;text-decoration-thickness:1px}
+.meta .al{background:var(--warn-soft);color:var(--warn)}
+.meta .pr{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.meta .cp{border:1px dashed var(--line)}
+.hint{font-size:13px;color:var(--muted);margin:8px 0 0}
+.tr{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:14px}
+.tr h2{font-family:var(--display);font-weight:600;font-size:22px;margin:0 0 2px}
+.tr .sub{color:var(--muted);font-size:13.5px;margin:0 0 10px}
+.tr ol{margin:0;padding-left:22px;display:grid;gap:10px}
+.tr li::marker{font-family:var(--mono);color:var(--muted)}
+.tr .why{display:block;color:var(--muted);font-size:13.5px;max-width:70ch}
+.bar input:focus-visible,.bar select:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;margin-left:auto}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:var(--surface)}
+td.c{font-weight:500}
+td.a{color:var(--fg)}
+td.a.none{color:var(--muted);font-style:italic}
+.cf{display:inline-block;margin-left:6px;font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted);vertical-align:1px}
+.cf.alta{border-color:var(--accent);color:var(--accent)}
+.cf.baixa{border-style:dashed}
+.nt{display:block;font-size:12px;color:var(--muted);margin-top:2px;max-width:46ch}
+td.p span{font-family:var(--mono);font-size:12px;background:var(--chip);padding:2px 8px;border-radius:999px;white-space:nowrap}
+
+td.c .rs{display:block;font-weight:400;color:var(--muted);font-size:13.5px;margin-top:2px;max-width:60ch}
+td.c details{margin-top:6px;font-weight:400}
+td.c summary{cursor:pointer;color:var(--accent);font-size:13px;width:max-content}
+td.c summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dl{display:grid;gap:8px;margin-top:8px;font-size:13.5px}
+.dl b{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2px}
+.dl ul{margin:0;padding-left:18px}
+.tg{display:inline-block;font-size:12px;background:var(--accent-soft);color:var(--fg);padding:2px 8px;border-radius:6px;margin:0 4px 4px 0}
+.mt{font-size:12px;color:var(--muted)}
+.nv{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;white-space:nowrap}
+.nv::before{content:"";display:inline-block;width:22px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--accent) var(--f),var(--line) var(--f))}
+.nv.in{--f:33%}.nv.md{--f:66%}.nv.av{--f:100%}
+td.lv{min-width:120px}
+a.go{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap}
+a.go:hover{text-decoration:underline}
+.empty{padding:40px 0;color:var(--muted);text-align:center}
+.note{margin-top:24px;color:var(--muted);font-size:13px;max-width:70ch}
+@media (max-width:640px){
+  thead{display:none}
+  table,tbody,tr,td{display:block;width:100%}
+  tr{padding:12px 0;border-bottom:1px solid var(--line)}
+  td{border:0;padding:2px 0}
+  td.c{font-size:16px}
+  td.p{margin-top:6px}
+}
+</style>
+<div class="wrap">
+  <h1>Índice de Cursos do Drive</h1>
+  <p class="lede">Cada linha é uma pasta de curso dentro dos pacotes compartilhados. Busque por curso, autor, tópico, ferramenta ou habilidade, filtre por tema, nível e atualidade, e abra a pasta direto no Drive. Na aba Trilhas, sequências sugeridas do básico ao avançado.</p>
+  <div class="tabs" role="tablist"><button role="tab" id="t-idx" aria-selected="true" aria-controls="v-idx">Índice</button><button role="tab" id="t-tr" aria-selected="false" aria-controls="v-tr">Trilhas</button></div>
+  <section id="v-idx" role="tabpanel" aria-labelledby="t-idx">
+  <div class="bar">
+    <input id="q" type="search" placeholder="Buscar curso, autor, tópico ou habilidade…" aria-label="Buscar curso ou autor">
+    <select id="mc" aria-label="Filtrar por tema"><option value="">Todos os temas</option></select>
+    <select id="nv" aria-label="Filtrar por nível"><option value="">Todos os níveis</option></select>
+    <select id="at" aria-label="Filtrar por atualidade"><option value="">Toda atualidade</option></select>
+    <select id="fe" aria-label="Filtrar por ferramenta"><option value="">Todas as ferramentas</option></select>
+    <select id="al" aria-label="Filtrar por alerta"><option value="">Sem filtro de alerta</option></select>
+    <select id="pk" aria-label="Filtrar por pacote"><option value="">Todos os pacotes</option></select>
+    <button id="sa" type="button" aria-pressed="false">Mostrar todos</button>
+    <span class="count" id="n"></span>
+  </div>
+  <p class="hint" id="hid"></p>
+  <table>
+    <thead><tr><th>Curso</th><th>Autor</th><th>Tema</th><th>Nível</th><th>Pasta</th><th>Pacote</th></tr></thead>
+    <tbody id="tb"></tbody>
+  </table>
+  <p class="empty" id="empty" hidden>Nenhum curso encontrado. Tente outro termo, limpe os filtros ou use "Mostrar todos".</p>
+  </section>
+  <section id="v-tr" role="tabpanel" aria-labelledby="t-tr" hidden>
+    <p class="lede">Sequências por tema, de Iniciante a Avançado. Só entram cópias principais e cursos sem alerta.</p>
+    <div id="trs"></div>
+  </section>
+  <p class="note">O nível indica o que você precisa já saber para tirar proveito do curso, não o que a página de vendas promete; todo material do Doug Demarco está como Avançado. Autores com etiqueta (alta, média, baixa) vieram de pesquisa, porque o nome da pasta não trazia o autor; os demais vêm do próprio nome da pasta. Atualidade, ferramentas, alertas, volume e integridade vêm de uma varredura de dois níveis das pastas (contagem de aulas é um piso, não o total). Cursos com alerta (black/contingência, adulto, apostas, day trade, dinheiro fácil, sedução, saúde sem respaldo) ficam escondidos até você clicar em "Mostrar todos" ou escolher um alerta no filtro. Nas duplicatas, a "cópia principal" é a que tem mais aulas, depois a completa, depois a mais recente. Levantamento de 31/10/2026, varredura e classificação de 01/11/2026. Os pacotes DRIVE 12, 13 e 14 estavam vazios na varredura (acesso aparentemente revogado), e o DRIVE 11 tinha uma única pasta. Alguns cursos aparecem em mais de um pacote com links diferentes.</p>
+</div>
+<script>
+const D = __DATA__;
+const tb=document.getElementById('tb'),q=document.getElementById('q'),pk=document.getElementById('pk'),n=document.getElementById('n'),empty=document.getElementById('empty');
+const mc=document.getElementById('mc'),nv=document.getElementById('nv'),at=document.getElementById('at'),fe=document.getElementById('fe'),al=document.getElementById('al'),sa=document.getElementById('sa'),hid=document.getElementById('hid');
+const opt=(sel,vals)=>vals.forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o)});
+opt(at,['Atual','Recente','Datado','Atemporal']);
+opt(fe,[...new Set(D.rows.flatMap(r=>r[19]||[]))].sort((a,b)=>a.localeCompare(b,'pt')));
+opt(al,[...new Set(D.rows.flatMap(r=>r[20]||[]))].sort((a,b)=>a.localeCompare(b,'pt')));
+[...new Set(D.rows.flatMap(r=>[r[8],r[9]]).filter(Boolean))].sort().forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;mc.appendChild(o)});
+['Iniciante','Médio','Avançado'].forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;nv.appendChild(o)});
+D.packs.forEach(p=>{const o=document.createElement('option');o.value=p;o.textContent=p;pk.appendChild(o)});
+const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const idx=D.rows.map(r=>norm([r[0],r[1],r[7]||'',(r[10]||[]).join(' '),(r[11]||[]).join(' '),(r[19]||[]).join(' ')].join(' ')));
+function meta(r){const m=[];if(r[25])m.push(r[26]?`<span class="pr" title="Há ${r[27]} cópias deste curso; esta é a mais completa">cópia principal</span>`:`<span class="cp" title="Há uma cópia mais completa em outro pacote">outra cópia</span>`);(r[20]||[]).forEach(a=>m.push(`<span class="al">⚠ ${esc(a)}</span>`));if(r[18])m.push(`<span class="at-${r[18]}" title="Atualidade">${esc(r[18])}${r[16]?' · '+r[16]:''}</span>`);if(r[22])m.push(`<span title="Vídeos achados em 2 níveis de pasta">${r[22]} aulas · ${esc(r[23])}</span>`);if(r[21]&&r[21]!=='Completo')m.push(`<span title="Integridade">${esc(r[21])}</span>`);return m.length?`<span class="meta">${m.join('')}</span>`:''}
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function render(){
+  const t=norm(q.value.trim()),p=pk.value,m=mc.value,v=nv.value,a=at.value,f=fe.value,w=al.value,all=sa.getAttribute('aria-pressed')==='true';let html='',c=0,h=0;
+  D.rows.forEach((r,i)=>{
+    if(p&&r[3]!==p)return; if(m&&r[8]!==m&&r[9]!==m)return; if(v&&r[12]!==v)return; if(a&&r[18]!==a)return; if(f&&!(r[19]||[]).includes(f))return; if(w&&!(r[20]||[]).includes(w))return; if(t&&!idx[i].includes(t))return; if(!all&&!w&&(r[20]||[]).length){h++;return} c++;
+    html+=`<tr><td class="c">${esc(r[0])}${r[7]?`<span class="rs">${esc(r[7])}</span>`:''}${meta(r)}${(r[10]&&r[10].length)||(r[11]&&r[11].length)||(r[19]&&r[19].length)?`<details><summary>Tópicos e competências</summary><div class="dl">${r[10]&&r[10].length?`<div><b>Tópicos</b>${r[10].map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:''}${r[11]&&r[11].length?`<div><b>Competências</b><ul>${r[11].map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div>`:''}${r[19]&&r[19].length?`<div><b>Ferramentas</b>${r[19].map(t=>`<span class="tg">${esc(t)}</span>`).join('')}</div>`:''}${r[24]&&r[24].length?`<div><b>Materiais de apoio</b>${esc(r[24].join(' · '))}</div>`:''}<div class="mt">${esc([r[13],r[14]==='só o nome'?'perfil inferido só pelo nome':(r[14]?'base: '+r[14]:'')].filter(Boolean).join(' · '))}</div></div></details>`:''}</td><td class="a${r[1]?'':' none'}">${r[1]?esc(r[1]):(r[4]==='pasta vazia'?'pasta vazia':'autor não encontrado')}${['alta','média','baixa'].includes(r[4])?`<span class="cf ${r[4]==='média'?'media':r[4]}" title="Autor achado por pesquisa, confiança ${r[4]}">${r[4]}</span>`:''}${r[6]?`<span class="nt">${esc(r[6])}</span>`:''}</td><td>${r[8]?`<span class="tg">${esc(r[8])}</span>`:''}${r[9]?`<span class="tg">${esc(r[9])}</span>`:''}</td><td class="lv">${r[12]?`<span class="nv ${r[12]==='Avançado'?'av':r[12]==='Médio'?'md':'in'}">${esc(r[12])}</span>`:''}${r[15]?`<span class="nt">${esc(r[15])}</span>`:''}</td><td><a class="go" href="https://drive.google.com/drive/folders/${r[2]}" target="_blank" rel="noopener">Abrir pasta ↗</a></td><td class="p"><span>${esc(r[3])}</span></td></tr>`;
+  });
+  tb.innerHTML=html;n.textContent=c+' de '+D.rows.length+' cursos';empty.hidden=c>0;hid.textContent=h?`${h} curso${h>1?'s':''} com alerta escondido${h>1?'s':''}. Clique em "Mostrar todos" para ver.`:'';hid.hidden=!h;
+  try{localStorage.setItem('f',JSON.stringify({q:q.value,p:pk.value}))}catch(e){}
+}
+try{const f=JSON.parse(localStorage.getItem('f')||'null');if(f){q.value=f.q||'';if(D.packs.includes(f.p))pk.value=f.p}}catch(e){}
+q.addEventListener('input',render);[mc,nv,pk,at,fe,al].forEach(e=>e.addEventListener('change',render));
+sa.addEventListener('click',()=>{const on=sa.getAttribute('aria-pressed')!=='true';sa.setAttribute('aria-pressed',on);sa.textContent=on?'Esconder com alerta':'Mostrar todos';render()});render();
+document.getElementById('trs').innerHTML=(D.trilhas||[]).map(tr=>`<article class="tr"><h2>${esc(tr.titulo)}</h2><p class="sub">${esc(tr.tema)}${tr.descricao?' · '+esc(tr.descricao):''}</p><ol>${tr.itens.map(it=>{const r=D.rows[it.i];return `<li><strong>${esc(r[0])}</strong>${r[1]?` <span class="mt">— ${esc(r[1])}</span>`:''} ${r[12]?`<span class="nv ${r[12]==='Avançado'?'av':r[12]==='Médio'?'md':'in'}">${esc(r[12])}</span>`:''} <a class="go" href="https://drive.google.com/drive/folders/${r[2]}" target="_blank" rel="noopener">Abrir pasta ↗</a><span class="why">${esc(it.porque)}</span></li>`}).join('')}</ol></article>`).join('')||'<p class="empty">Nenhuma trilha ainda.</p>';
+const tabs=[['t-idx','v-idx'],['t-tr','v-tr']];function show(id){tabs.forEach(([b,v])=>{const on=b===id;document.getElementById(b).setAttribute('aria-selected',on);document.getElementById(v).hidden=!on});try{localStorage.setItem('tab',id)}catch(e){}}
+tabs.forEach(([b])=>document.getElementById(b).addEventListener('click',()=>show(b)));try{const tb0=localStorage.getItem('tab');if(tb0==='t-tr')show(tb0)}catch(e){}
+</script>
