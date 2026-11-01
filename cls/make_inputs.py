@@ -15,6 +15,8 @@ for i, r in enumerate(rows):
     c = crawl.get(i, {})
     d = dict(i=i, curso=r[0], autor=r[1], pacote=r[3], tema=' / '.join(x for x in (r[8], r[9]) if x),
              resumo=r[7], topicos=r[10], competencias=r[11])
-    for k in ('n1', 'n2', 'folders1', 'types', 'names', 'created_min', 'created_max', 'modified_max', 'years_in_names'):
+    for k in ('n1', 'n2', 'folders1', 'types', 'created_min', 'years_in_names'):
         d[k] = c.get(k)
+    d['names'] = [n[:60] for n in (c.get('names') or [])[:25]]
+    d['prof'] = c.get('prof', 2)
     outs[i % K].write(json.dumps(d, ensure_ascii=False) + '\n')
