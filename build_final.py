@@ -65,7 +65,7 @@ for t in trilhas:
 
 out = {'rows': rows, 'packs': d4['packs'], 'trilhas': trilhas}
 json.dump(out, open(f'{R}/data5.json', 'w', encoding='utf-8'), ensure_ascii=False)
-head = open(f'{R}/page_head5.html', encoding='utf-8').read()
+head = open(f'{R}/page_head6.html', encoding='utf-8').read()
 payload = json.dumps(out, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 open(f'{R}/indice-cursos.html', 'w', encoding='utf-8').write(head.replace('__DATA__', payload))
 
